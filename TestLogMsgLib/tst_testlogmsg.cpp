@@ -51,7 +51,7 @@ void TestLogMsg::test_setDirectoryPath_data()
 {
     QTest::addColumn<std::string>("path");
     QTest::addColumn<unsigned int>("limit");
-    unsigned int limit = 1024;
+    unsigned int limit = 2048;
     QTest::newRow("test1") << std::string("C:\\Repos\\TestTaskAgat\\Log0") << limit;
 }
 

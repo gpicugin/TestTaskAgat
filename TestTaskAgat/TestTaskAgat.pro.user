@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 8.0.0, 2022-08-15T10:34:26. -->
+<!-- Written by QtCreator 8.0.0, 2022-08-15T08:19:17. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -67,22 +67,7 @@
     <value type="bool" key="AutoTest.Framework.QtQuickTest">true</value>
     <value type="bool" key="AutoTest.Framework.QtTest">true</value>
    </valuemap>
-   <valuemap type="QVariantMap" key="AutoTest.CheckStates">
-    <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:TestLogMsg">Checked</value>
-    <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:cleanupTestCase">Unchecked</value>
-    <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:test1">Checked</value>
-    <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:test_log">Checked</value>
-    <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:test_log_data">Unchecked</value>
-    <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:test_setDirectoryPath">Checked</value>
-    <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:test_setDirectoryPath_data">Unchecked</value>
-    <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:TestLogMsg">Checked</value>
-    <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:cleanupTestCase">Unchecked</value>
-    <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:test1">Checked</value>
-    <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:test_log">Checked</value>
-    <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:test_log_data">Unchecked</value>
-    <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:test_setDirectoryPath">Checked</value>
-    <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:test_setDirectoryPath_data">Unchecked</value>
-   </valuemap>
+   <valuemap type="QVariantMap" key="AutoTest.CheckStates"/>
    <value type="int" key="AutoTest.RunAfterBuild">0</value>
    <value type="bool" key="AutoTest.UseGlobal">true</value>
    <valuemap type="QVariantMap" key="ClangTools">
@@ -250,9 +235,8 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">TestLogMsgLib2</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Repos/TestTaskAgat/TestLogMsgLib/TestLogMsgLib.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Repos/TestTaskAgat/TestLogMsgLib/TestLogMsgLib.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Repos/TestTaskAgat/TestTaskAgat/TestLogMsgLib/TestLogMsgLib.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Repos/TestTaskAgat/TestTaskAgat/TestLogMsgLib/TestLogMsgLib.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
