@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 8.0.0, 2022-08-15T10:34:26. -->
+<!-- Written by QtCreator 8.0.0, 2022-08-15T21:08:06. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -75,13 +75,6 @@
     <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:test_log_data">Unchecked</value>
     <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:test_setDirectoryPath">Checked</value>
     <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:test_setDirectoryPath_data">Unchecked</value>
-    <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:TestLogMsg">Checked</value>
-    <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:cleanupTestCase">Unchecked</value>
-    <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:test1">Checked</value>
-    <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:test_log">Checked</value>
-    <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:test_log_data">Unchecked</value>
-    <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:test_setDirectoryPath">Checked</value>
-    <value type="Qt::CheckState" key="1@C:/Repos/TestTaskAgat/TestTaskAgat/TestLogMsgLib/tst_testlogmsg.cpp:test_setDirectoryPath_data">Unchecked</value>
    </valuemap>
    <value type="int" key="AutoTest.RunAfterBuild">0</value>
    <value type="bool" key="AutoTest.UseGlobal">true</value>

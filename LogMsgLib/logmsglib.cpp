@@ -1,7 +1,7 @@
 #include "logmsglib.h"
 #include <fstream>
 #include <QDateTime>
-static unsigned int global_limit = 0; // TODO check correctness of dimention of bytes
+static unsigned int global_limit = 0;
 static std::string global_path = "";
 static unsigned int global_current_index = 0;
 
@@ -29,30 +29,28 @@ bool setDirectory(const std::string& path, unsigned int limit)
 
 void log(const std::string& text)
 {
-
-    QDateTime dateTime = QDateTime::currentDateTime();
-    QDate date = dateTime.date();
+    QDate date = QDate::currentDate();
     int day, month, year;
     date.getDate(&year, &month, &day);
-    std::fstream fs;
     std::string dateText = std::to_string(day) + "-" +
-                           std::to_string(month) + "-" + std::to_string(year) + "|" + text; // FIXME wrong date
-    QFileInfo info;
+                           std::to_string(month) + "-" + std::to_string(year) + "|" + text;
+
     std::string pathFile = global_path + "\\" + std::to_string(global_current_index) + ".txt";
-    static unsigned int counter = 0;
 
-
+    QFileInfo info;
     info.setFile(pathFile.c_str());
+
+    std::fstream fs;
+    static unsigned int counter = 0;
     if(info.size() + dateText.size() <= global_limit)      // если влазит, то пишем
     {
-        fs.open(pathFile, std::ios::app);                  // FIXME input without empty string
+        fs.open(pathFile, std::ios::app);
         if(counter != 0)
         {
             fs << "\n";
         }
         fs << dateText;
         counter++;
-
     }
     else                                                    // если не влазит, то в новый файл
     {
@@ -63,6 +61,5 @@ void log(const std::string& text)
         fs << dateText;
         counter++;
     }
-
     fs.close();
 }
