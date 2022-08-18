@@ -9,7 +9,7 @@
 #include <QFileInfo>
 const unsigned int& LOGMSGLIB_EXPORT getGlobalLimit();
 
-const std::string&  LOGMSGLIB_EXPORT getPath();
+std::filesystem::path LOGMSGLIB_EXPORT getGlobalPath();
 
 const unsigned int& LOGMSGLIB_EXPORT getCurrentIndex();
 

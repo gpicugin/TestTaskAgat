@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <../LogMsgLib/logmsglib.h>
 // add necessary includes here
-
+// TODO run tests couple times
 class TestLogMsg : public QObject
 {
     Q_OBJECT
@@ -39,7 +39,7 @@ void TestLogMsg::test_setDirectoryPath()
     QFETCH(std::string, path);
     QFETCH(unsigned int, limit);
 
-    setDirectory(path, limit);
+    QVERIFY(setDirectory(path, limit));
     QString qPath(path.c_str());
     QFileInfo info(qPath);
 
@@ -58,10 +58,13 @@ void TestLogMsg::test_setDirectoryPath_data()
 void TestLogMsg::test_log()
 {
     QFETCH(std::string, text);
-    unsigned int currInxex = getCurrentIndex();
-    std::string currLogFilePath = getPath() + "\\" + std::to_string(currInxex) + ".txt";
-    QString qCurrLogFilePath(currLogFilePath.c_str());
-    QFileInfo info1(qCurrLogFilePath);
+    unsigned int currIndex = getCurrentIndex();
+    std::filesystem::path path;
+    path = getGlobalPath();
+    path /= std::string(std::to_string(currIndex) + ".txt");
+    //std::string currLogFilePath = getPath(). + "\\" + std::to_string(currIndex) + ".txt";
+    //QString qCurrLogFilePath(path.c_str());
+    QFileInfo info1(path);
     unsigned int prevSize = info1.size();
     log(text);
     info1.refresh();
@@ -70,10 +73,23 @@ void TestLogMsg::test_log()
     QDate date = dateTime.date();
     int day, month, year;
     date.getDate(&year, &month, &day);
-    std::string dateText = std::to_string(day) + "-" +
-                           std::to_string(month) + "-" + std::to_string(year) + "|" + text;
+    std::string strDay(std::to_string(day)),
+        strMonth(std::to_string(month)), strYear(std::to_string(year));
 
-    QFileInfo info2(QString(std::string(getPath() +  "\\" + std::to_string(currInxex + 1) + ".txt").c_str()));
+    if(month < 10)
+    {
+        strMonth.insert(0, "0");
+    }
+    if(day < 10)
+    {
+        strDay.insert(0, "0");
+    }
+    date.getDate(&year, &month, &day);
+    std::string dateText = strDay + "-" + strMonth + "-" + strYear + "|" + text;
+
+    path = getGlobalPath();
+    path /= std::string(std::to_string(currIndex + 1) + ".txt");
+    QFileInfo info2(path);
     bool result = ((prevSize < info1.size()) || info2.exists());
 
     QVERIFY(result);
