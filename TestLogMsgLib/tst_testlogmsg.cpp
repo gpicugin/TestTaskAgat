@@ -55,6 +55,35 @@ void TestLogMsg::test_setDirectoryPath_data()
     QTest::newRow("test1") << std::string("C:\\Repos\\TestTaskAgat\\Log0") << limit;
 }
 
+
+std::string getLastString(std::fstream& fstream)
+{
+    fstream.seekg(-1,std::ios_base::end);               // go to one spot before the EOF
+
+    bool keepLooping = true;
+    while(keepLooping)
+    {
+        char ch;
+        fstream.get(ch);                                 // Get current byte's data
+
+        if((int)fstream.tellg() <= 1)
+        {                                                // If the data was at or before the 0th byte
+            fstream.seekg(0);                            // The first line is the last line
+            keepLooping = false;                         // So stop there
+        }
+        else if(ch == '\n') {                            // If the data was a newline
+            keepLooping = false;                         // Stop at the current position.
+        }
+        else {                                           // If the data was neither a newline nor at the 0 byte
+            fstream.seekg(-2,std::ios_base::cur);        // Move to the front of that data, then to the front of the data before it
+        }
+    }
+
+    std::string lastString;
+    getline(fstream,lastString);
+    return lastString;
+}
+
 void TestLogMsg::test_log()
 {
     QFETCH(std::string, text);
@@ -62,8 +91,6 @@ void TestLogMsg::test_log()
     std::filesystem::path path;
     path = testLib::getGlobalPath();
     path /= std::string(std::to_string(currIndex) + ".txt");
-    //std::string currLogFilePath = getPath(). + "\\" + std::to_string(currIndex) + ".txt";
-    //QString qCurrLogFilePath(path.c_str());
     QFileInfo info1(path);
     unsigned int prevSize = info1.size();
     testLib::log(text);
@@ -73,17 +100,15 @@ void TestLogMsg::test_log()
     QDate date = dateTime.date();
     int day, month, year;
     date.getDate(&year, &month, &day);
-    std::string strDay(std::to_string(day)),
-        strMonth(std::to_string(month)), strYear(std::to_string(year));
+    std::string strDay(std::to_string(day)), strMonth(std::to_string(month)),
+                strYear(std::to_string(year));
 
     if(month < 10)
-    {
         strMonth.insert(0, "0");
-    }
+
     if(day < 10)
-    {
         strDay.insert(0, "0");
-    }
+
     date.getDate(&year, &month, &day);
     std::string dateText = strDay + "-" + strMonth + "-" + strYear + "|" + text;
 
@@ -97,31 +122,8 @@ void TestLogMsg::test_log()
     QVERIFY(info.size() <= testLib::getGlobalLimit());
 
     std::fstream fstream( info2.exists() ? info2.filePath().toStdString() : info1.filePath().toStdString());
-    fstream.seekg(-1,std::ios_base::end);       // go to one spot before the EOF
 
-    bool keepLooping = true;
-    while(keepLooping)
-    {
-        char ch;
-        fstream.get(ch);                        // Get current byte's data
-
-        if((int)fstream.tellg() <= 1)
-        {                                       // If the data was at or before the 0th byte
-            fstream.seekg(0);                   // The first line is the last line
-            keepLooping = false;                // So stop there
-        }
-        else if(ch == '\n') {                   // If the data was a newline
-            keepLooping = false;                // Stop at the current position.
-        }
-        else {                                  // If the data was neither a newline nor at the 0 byte
-            fstream.seekg(-2,std::ios_base::cur);        // Move to the front of that data, then to the front of the data before it
-        }
-    }
-
-    std::string lastLine;
-    getline(fstream,lastLine);
-
-    QCOMPARE(lastLine, dateText);
+    QCOMPARE(getLastString(fstream), dateText);
 }
 
 void TestLogMsg::test_log_data()
