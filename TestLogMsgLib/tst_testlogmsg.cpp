@@ -39,12 +39,12 @@ void TestLogMsg::test_setDirectoryPath()
     QFETCH(std::string, path);
     QFETCH(unsigned int, limit);
 
-    QVERIFY(setDirectory(path, limit));
+    QVERIFY(testLib::setDirectory(path, limit));
     QString qPath(path.c_str());
     QFileInfo info(qPath);
 
     QCOMPARE(info.exists() && info.isDir(), true);
-    QCOMPARE(limit, getGlobalLimit());
+    QCOMPARE(limit, testLib::getGlobalLimit());
 }
 
 void TestLogMsg::test_setDirectoryPath_data()
@@ -58,15 +58,15 @@ void TestLogMsg::test_setDirectoryPath_data()
 void TestLogMsg::test_log()
 {
     QFETCH(std::string, text);
-    unsigned int currIndex = getCurrentIndex();
+    unsigned int currIndex = testLib::getCurrentIndex();
     std::filesystem::path path;
-    path = getGlobalPath();
+    path = testLib::getGlobalPath();
     path /= std::string(std::to_string(currIndex) + ".txt");
     //std::string currLogFilePath = getPath(). + "\\" + std::to_string(currIndex) + ".txt";
     //QString qCurrLogFilePath(path.c_str());
     QFileInfo info1(path);
     unsigned int prevSize = info1.size();
-    log(text);
+    testLib::log(text);
     info1.refresh();
 
     QDateTime dateTime = QDateTime::currentDateTime();
@@ -87,14 +87,14 @@ void TestLogMsg::test_log()
     date.getDate(&year, &month, &day);
     std::string dateText = strDay + "-" + strMonth + "-" + strYear + "|" + text;
 
-    path = getGlobalPath();
+    path = testLib::getGlobalPath();
     path /= std::string(std::to_string(currIndex + 1) + ".txt");
     QFileInfo info2(path);
     bool result = ((prevSize < info1.size()) || info2.exists());
 
     QVERIFY(result);
     QFileInfo& info = info2.exists() ? info2 : info1;
-    QVERIFY(info.size() <= getGlobalLimit());
+    QVERIFY(info.size() <= testLib::getGlobalLimit());
 
     std::fstream fstream( info2.exists() ? info2.filePath().toStdString() : info1.filePath().toStdString());
     fstream.seekg(-1,std::ios_base::end);       // go to one spot before the EOF

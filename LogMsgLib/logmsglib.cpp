@@ -8,22 +8,22 @@ static unsigned int globalLimit = 0;
 static std::filesystem::path globalPath;
 static unsigned int globalCurrentIndex = 0;
 
-const unsigned int& getGlobalLimit()
+const unsigned int& testLib::getGlobalLimit()
 {
     return globalLimit;
 }
 
-std::filesystem::path getGlobalPath()
+std::filesystem::path testLib::getGlobalPath()
 {
     return globalPath;
 }
 
-const unsigned int& getCurrentIndex()
+const unsigned int& testLib::getCurrentIndex()
 {
     return globalCurrentIndex;
 }
 
-bool setDirectory(const std::string& path, unsigned int limit)
+bool testLib::setDirectory(const std::string& path, unsigned int limit)
 {
     globalLimit = limit;
     globalPath = path;
@@ -35,7 +35,7 @@ bool setDirectory(const std::string& path, unsigned int limit)
         result = std::filesystem::create_directory(path);
     else
         result = true;
-    if(dir.isEmpty()) // TODO numeric .txt
+    if(dir.isEmpty())
     {
         globalCurrentIndex = 0;
     }
@@ -46,9 +46,9 @@ bool setDirectory(const std::string& path, unsigned int limit)
         QVector<int> numerics;
         foreach(QString name, namesOfFiles)
         {
-            if(rx.match(name).hasMatch())
+            if( rx.match(name).hasMatch())
             {
-                int tmp = QString(name.begin(), name.size() - 4).toInt();
+                int tmp = QString(name.cbegin(), name.size() - 4).toInt();
                 numerics << tmp;
             }
         }
@@ -58,7 +58,7 @@ bool setDirectory(const std::string& path, unsigned int limit)
     return result;
 }
 
-void log(const std::string& text)
+void testLib::log(const std::string& text)
 {
     QDate date = QDate::currentDate();
     int day, month, year;
@@ -84,30 +84,35 @@ void log(const std::string& text)
     info.setFile(pathFile);
 
     std::fstream fs;
-    static unsigned int counter;
+
+    static bool firstStrFlag;
     if (info.size() == 0)
-        counter = 0;
+    {
+        firstStrFlag = true;
+    }
     else
-        counter = 1; // != 0
-    if(info.size() + dateText.size() <= globalLimit)      // если влазит, то пишем
+    {
+        firstStrFlag = false;
+    }
+    unsigned int newSize = info.size()  + dateText.size() + ((firstStrFlag) ? 0 : 1);
+
+    if(newSize <= globalLimit)      // если влазит, то пишем
     {
         fs.open(pathFile, std::ios::app);
-        if(counter != 0)
+        if(!firstStrFlag)
         {
             fs << "\n";
         }
         fs << dateText;
-        counter++;
+        firstStrFlag = false;
     }
     else                                                    // если не влазит, то в новый файл
     {
         globalCurrentIndex++;
-        counter = 0;
         std::filesystem::path pathFile2(globalPath);
         pathFile2 /= std::string(std::to_string(globalCurrentIndex) + ".txt");
         fs.open(pathFile2, std::ios::app);
         fs << dateText;
-        counter++;
     }
     fs.close();
 }

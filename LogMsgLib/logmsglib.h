@@ -7,14 +7,17 @@
 #include <filesystem>
 #include <time.h>
 #include <QFileInfo>
-const unsigned int& LOGMSGLIB_EXPORT getGlobalLimit();
 
-std::filesystem::path LOGMSGLIB_EXPORT getGlobalPath();
+namespace testLib
+{
+    const unsigned int& LOGMSGLIB_EXPORT getGlobalLimit();
 
-const unsigned int& LOGMSGLIB_EXPORT getCurrentIndex();
+    std::filesystem::path LOGMSGLIB_EXPORT getGlobalPath();
 
-bool LOGMSGLIB_EXPORT setDirectory(const std::string& path, unsigned int limit);
+    const unsigned int& LOGMSGLIB_EXPORT getCurrentIndex();
 
-void LOGMSGLIB_EXPORT log(const std::string& text);
+    bool LOGMSGLIB_EXPORT setDirectory(const std::string& path, unsigned int limit);
 
+    void LOGMSGLIB_EXPORT log(const std::string& text);
+}
 #endif // LOGMSGLIB_H
